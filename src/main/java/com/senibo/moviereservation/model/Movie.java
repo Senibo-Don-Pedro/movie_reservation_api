@@ -18,6 +18,16 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+
+/**
+ * Represents the "Metadata" of a film.
+ * This entity holds static details about a movie.
+ *
+ * Key Logic:
+ * - Does not contain schedule information (see {@link ShowTime}).
+ * - durationInMinutes is critical for scheduling logic to prevent overlapping shows.
+ */
+
 @Entity
 @Table(name = "movies")
 @Getter

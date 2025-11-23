@@ -4,6 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +15,16 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+
+
+/**
+ * Represents a specific physical seat in a specific Room.
+ *
+ * ARCHITECTURAL NOTE:
+ * This entity is STATELESS. It does not know if it is reserved.
+ * Reservation status is derived by checking the existence of a {@link Ticket}
+ * for a specific {@link ShowTime} linking to this seat.
+ */
 @Entity
 @Table(name = "seats")
 @Getter
@@ -23,7 +36,7 @@ import lombok.experimental.SuperBuilder;
 public class Seat extends BaseEntity {
 
   @Column(nullable = false)
-  private Character row;
+  private Character seatRow;
 
   @Column(nullable = false)
   private Integer seatNumber;
@@ -32,4 +45,7 @@ public class Seat extends BaseEntity {
   @ManyToOne
   @JoinColumn(name = "room_id") // foreign key
   private Room room;
+
+  @OneToMany(mappedBy = "seats")
+  private List<Ticket> tickets;
 }

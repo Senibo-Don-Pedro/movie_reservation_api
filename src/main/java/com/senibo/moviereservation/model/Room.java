@@ -16,6 +16,16 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import jakarta.persistence.CascadeType;
 
+
+/**
+ * Represents a physical auditorium or screen within the cinema.
+ *
+ * Key Logic:
+ * - Acts as the parent constraint for {@link Seat} generation.
+ * - Total seats are cached here for performance, but actual availability
+ * must be calculated via {@link ShowTime} and {@link Ticket} logic.
+ */
+
 @Entity
 @Table(name = "rooms")
 @Getter

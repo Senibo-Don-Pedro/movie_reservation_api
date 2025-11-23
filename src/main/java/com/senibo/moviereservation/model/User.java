@@ -1,5 +1,6 @@
 package com.senibo.moviereservation.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,11 +11,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+
+
 
 @Entity
 @Table(name = "users")
@@ -36,7 +40,8 @@ public class User extends BaseEntity {
   @JsonIgnore
   private String password;
 
-  @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-  private List<Reservation> reservations;
+  @Builder.Default
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Reservation> reservations = new ArrayList<>();
 
 }
