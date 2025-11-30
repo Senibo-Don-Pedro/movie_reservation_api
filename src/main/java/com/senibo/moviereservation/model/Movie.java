@@ -3,6 +3,8 @@ package com.senibo.moviereservation.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -56,5 +58,6 @@ public class Movie extends BaseEntity {
 
   @Builder.Default
   @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+  @JsonIgnore // <--- ADD THIS
   private List<ShowTime> showTimes = new ArrayList<>();
 }

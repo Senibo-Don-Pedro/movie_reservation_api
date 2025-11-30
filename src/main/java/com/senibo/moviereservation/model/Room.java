@@ -3,6 +3,8 @@ package com.senibo.moviereservation.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -36,7 +38,7 @@ import jakarta.persistence.CascadeType;
 @SuperBuilder
 public class Room extends BaseEntity {
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String name;
 
   @Column(nullable = false)
@@ -49,5 +51,6 @@ public class Room extends BaseEntity {
 
   @Builder.Default
   @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+  @JsonIgnore // <--- ADD THIS
   private List<ShowTime> showTimes = new ArrayList<>();
 }

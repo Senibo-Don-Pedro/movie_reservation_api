@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,8 +42,12 @@ public class ShowTime extends BaseEntity {
   @Column(nullable = false)
   private LocalDateTime movieStartTime;
 
+  @Column(nullable = false)
+  private LocalDateTime movieEndTime;
+
   @Builder.Default
   @OneToMany(mappedBy = "showTime", cascade = CascadeType.ALL)
+  @JsonIgnore
   private List<Reservation> reservations = new ArrayList<>();
 
   @ManyToOne // Logic: Many showtimes can act on ONE movie
@@ -51,7 +57,4 @@ public class ShowTime extends BaseEntity {
   @ManyToOne // Logic: Many showtimes can happen in ONE room
   @JoinColumn(name = "room_id", nullable = false)
   private Room room;
-
-
-
 }

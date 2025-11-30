@@ -1,5 +1,7 @@
 package com.senibo.moviereservation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -31,6 +33,7 @@ public class Ticket extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "reservation_id")
+  @JsonIgnore
   private Reservation reservation;
 
   @ManyToOne

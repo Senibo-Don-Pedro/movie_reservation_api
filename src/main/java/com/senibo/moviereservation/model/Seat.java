@@ -7,6 +7,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,8 +47,9 @@ public class Seat extends BaseEntity {
   // many rooms, one seat
   @ManyToOne
   @JoinColumn(name = "room_id") // foreign key
+  @JsonIgnore // <--- ADD THIS
   private Room room;
 
-  @OneToMany(mappedBy = "seats")
+  @OneToMany(mappedBy = "seat")
   private List<Ticket> tickets;
 }

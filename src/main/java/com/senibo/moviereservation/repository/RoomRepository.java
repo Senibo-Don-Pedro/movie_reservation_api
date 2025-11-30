@@ -9,5 +9,5 @@ import com.senibo.moviereservation.model.Room;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, UUID>{
-  
+  boolean existsByName(String name);
 }
